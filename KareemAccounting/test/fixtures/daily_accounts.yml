@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_spend: MyString
+  amount: 1
+  note: MyString
+  to_whome: MyString
+
+two:
+  category_spend: MyString
+  amount: 1
+  note: MyString
+  to_whome: MyString

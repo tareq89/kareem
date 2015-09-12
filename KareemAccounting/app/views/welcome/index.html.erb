@@ -1,0 +1,6 @@
+<h1>তারিখ অনুযায়ী জমা খরচ নির্বাচন করুনঃ </h1>
+<ul>
+	<% @uniq_dates_from_daily_accounts.each do |uniq_date| %>
+		<li><%= link_to uniq_date, daily_accounts_path(uniq_date: uniq_date) %></li>
+	<% end %>
+</ul>

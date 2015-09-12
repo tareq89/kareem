@@ -1,0 +1,25 @@
+<% provide(:title, 'Edit Daily Account') %>
+<%= form_for(@daily_account) do |f| %>
+<table>
+		<thead>
+			<tr>
+				<th>খাত</th>
+				<th>পরিমাণ ৳ </th>
+				<th>পরিশোধ করা হয়েছে যাকে </th>
+				<th>ধরন </th>
+				<th>নোট </th>
+				<th>সময় </th>
+			</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td> <%= f.text_field :category_spend  %> </td>
+			<td> <%= f.text_field :amount  %> </td>				
+			<td> <%= f.text_field :to_whome  %> </td>
+			<td> <%= f.select :kind, account_type_options   %> </td>
+			<td> <%= f.text_field :note  %> </td>
+			<td> <%= f.submit  %> </td>
+		</tr>
+	</tbody>
+</table>
+<% end %>

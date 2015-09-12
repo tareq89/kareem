@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KareemAccounting</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<title><%= full_title(yield(:title))  %></title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<meta charset="UTF=8"/>
+	<style>
+		table, tr {
+		   border: 1px solid black;
+		}
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		} 
+		ul, li {
+			display: inline;
+		}
+		
+	</style>
 </head>
 <body>
 
 <%= yield %>
-
+<%= debug(params) if Rails.env.development? %>
 </body>
 </html>
