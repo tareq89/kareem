@@ -3,19 +3,18 @@ function makeTrHiddenOnRadioSelect (argument) {
 	var total_amount = 0;
 
 	$("tbody tr").each(function() {
-		if (argument.id != this.className) 
-			$(this).css({'display':'none'});		
-		else
-			// console.log($(this).find(".amount").context.cells[1].innerHTML);		
-			total_amount += parseInt($(this).find(".amount").context.cells[1].innerHTML);
+		if (argument.id == "all") {
+			$("tbody tr").css({"display":""});
+			total_amount += parseInt($(this).find(".amount").context.cells[1].innerHTML);									
+		}
+		else if (argument.id != this.className){
+			$(this).css({'display':'none'});
+		};
+		if (argument.id == this.className) {
+			total_amount += parseInt($(this).find("#amount").context.cells[1].innerHTML);								
+		};				 
 	});		
-	if (argument.id == "all") {
-		$("tbody tr").css({"display":""});
-		
-		$("tbody tr").each(function() {
-			total_amount += parseInt($(this).find(".amount").context.cells[1].innerHTML);
-		})	
-	};
-	document.getElementById('total_amount').innerHTML = total_amount;
+
+	document.getElementById('total_amount').innerHTML = "	Total : "+total_amount+" ৳";
 	console.log(total_amount);
 }

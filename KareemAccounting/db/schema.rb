@@ -11,17 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912060601) do
+ActiveRecord::Schema.define(version: 20150913094139) do
+
+  create_table "account_types", force: :cascade do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "daily_accounts", force: :cascade do |t|
     t.string   "category_spend"
     t.integer  "amount"
     t.string   "note"
     t.string   "to_whome"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.date     "date"
     t.string   "kind"
+    t.integer  "account_type_id"
+    t.string   "from_whom"
   end
 
 end

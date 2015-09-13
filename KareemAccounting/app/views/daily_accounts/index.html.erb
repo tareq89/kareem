@@ -6,20 +6,24 @@
 <% end %>
 <div>
 	<form action="">
-		<% account_type_options_select.each do |item| %>
+		<% AccountType.account_type_options_select.each do |item| %>
 			<input type="radio" id=<%= item[:value] %> name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:key] %> 		
 		<% end %>		
 	</form>
 </div>
+<%= render 'shared/error_message' %>
 <table>
 	<thead>
 			<tr>
 				<th>খাত</th>
 				<th>পরিমাণ ৳ </th>
 				<th>পরিশোধ করা হয়েছে যাকে </th>
+				<th>যে পরিশোধ করেছে </th>
 				<th>ধরন </th>
 				<th>নোট </th>
 				<th>সময় </th>
+				<th>এডিট</th>
+				<th>ডিলিট</th>
 			</tr>
 	</thead>
 	<tbody>
@@ -28,6 +32,7 @@
 				<td><%= daily_account.category_spend %></td>
 				<td><%= daily_account.amount %></td>
 				<td><%= daily_account.to_whome %></td>
+				<td><%= daily_account.from_whom %></td>
 				<td><%= daily_account.kind %></td>
 				<td><%= daily_account.note %></td>
 				<td><%= daily_account.created_at.strftime("%I:%M %p") %></td>
@@ -35,20 +40,6 @@
 				<td><%= link_to "delete", daily_account, method: :delete, data: { confirm: "You sure?" } %></td>
 			</tr>
 		<% end %>
-			
-		<% if @can_add_new_entry %>
-			<%= form_for(@new_daily_account) do |f| %>
-				<tr>
-					<td> <%= f.text_field :category_spend  %> </td>
-					<td class="amount"> <%= f.text_field :amount  %> </td>				
-					<td> <%= f.text_field :to_whome  %> </td>
-					<td> <%= f.select :kind, account_type_options   %> </td>
-					<td> <%= f.text_field :note  %> </td>
-					<td> <%= f.submit  %> </td>
-				</tr>
-			<% end %>			
-		<% end %>
-		
 	</tbody>
 	<tfoot>
 		<tr>
@@ -57,6 +48,51 @@
 			<td></td>
 			<td></td>
 			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 	</tfoot>
 </table>
+
+<% if @can_add_new_entry %>
+	<%= form_for(@new_daily_account) do |f| %>
+		<ul id="account_form_entry">
+			<li> 
+				<h3>খাত</h3>
+				<%= f.text_field :category_spend, placeholder: "খাত"  %>
+			</li>
+			<li id="amount"> 
+				<h3>Vat khamu</h3>
+				<%= f.text_field :amount, placeholder: "পরিমাণ ৳ "  %>
+			</li>
+			<li> 
+				<h3>Vat khamu</h3>
+				<%= f.text_field :to_whome, placeholder: "পরিশোধ করা হয়েছে যাকে "  %>
+			</li>
+			<li> 
+				<h3>Vat khamu</h3>
+				<%= f.text_field :from_whom, placeholder: "যে পরিশোধ করেছে "  %>
+			</li>
+			<li> 
+				<h3>Vat khamu</h3>
+				<%= f.select :kind, AccountType.account_type_options , placeholder: "ধরন "  %>
+			</li>
+			<li> 
+				<h3>Vat khamu</h3>
+				<%= f.text_field :note, placeholder: "নোট "  %>
+			</li>
+			<li> 
+				<h3>Vat khamu</h3>
+				<%= f.submit  %>
+			</li>
+			<li></li>
+		</ul>
+	<% end %>			
+<% end %>
+
+পরিমাণ ৳ 
+পরিশোধ করা হয়েছে যাকে 
+যে পরিশোধ করেছে 
+ধরন 
+নোট 

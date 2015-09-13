@@ -23,7 +23,16 @@ class DailyAccountsController < ApplicationController
 	def create
 		@daily_account = DailyAccount.new(daily_account_params)
 		if @daily_account.save
-			redirect_to daily_accounts_path
+			redirect_to daily_accounts_path(:uniq_date => Date.today)
+		else
+			@errors = []
+			@daily_account.errors.full_messages.each do |msg| 
+				@errors << msg
+			end 
+			print "This is error message : "
+			print @errors
+			print "\n"
+			redirect_to daily_accounts_path(:uniq_date => Date.today, :errors => @errors)
 		end
 		
 	end
@@ -42,7 +51,7 @@ class DailyAccountsController < ApplicationController
 	def update
 		@daily_account = DailyAccount.find(params[:id])
 		if @daily_account.update_attributes(daily_account_params)
-			redirect_to daily_accounts_path
+			redirect_to daily_accounts_path(:uniq_date => Date.today)
 		else
 			render 'edit'			
 		end
@@ -54,7 +63,7 @@ class DailyAccountsController < ApplicationController
 	end
 	private
 		def daily_account_params
-			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :uniq_date, :kind)
+			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :from_whom, :uniq_date, :kind, :errors)
 			
 		end
 end

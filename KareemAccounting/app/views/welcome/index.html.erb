@@ -1,6 +1,18 @@
 <h1>তারিখ অনুযায়ী জমা খরচ নির্বাচন করুনঃ </h1>
 <ul>
+	<li><h2>সব একাউন্ট</h2></li>
+	<li><h2>আয়</h2></li>
+	<li><h2>ব্যয়</h2></li>
+	<li><h2>ধার দিয়েছি</h2></li>
+	<li><h2>ধার পরিশোধ হয়েছে</h2></li>
+	<li><h2>ঋণ নিয়েছি</h2></li>
+	<li><h2>ঋণ পরিশোধ হয়েছে</h2></li>
+	<li><h2>অন্যান্য</h2></li>	
+</ul>
+<ul>
 	<% @uniq_dates_from_daily_accounts.each do |uniq_date| %>
 		<li><%= link_to uniq_date, daily_accounts_path(uniq_date: uniq_date) %></li>
 	<% end %>
+	
+	<h1><%= link_to "আজকের হিসাব ", daily_accounts_path(uniq_date: Date.today) %></h1>
 </ul>
