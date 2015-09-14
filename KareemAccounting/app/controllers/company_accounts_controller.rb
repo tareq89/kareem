@@ -1,4 +1,4 @@
-class CompanyAccountController < ApplicationController
+class CompanyAccountsController < ApplicationController
 
 
 	def index
@@ -6,11 +6,11 @@ class CompanyAccountController < ApplicationController
 	end
 
 	def create
-		# @new_company = CompanyAccount.new
+		@new_company = CompanyAccount.new
 	end
 
 	def new
-		@new_company = ""
+		@new_company = CompanyAccount.new
 	end
 
 	def edit
