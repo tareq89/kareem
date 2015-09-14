@@ -1,0 +1,28 @@
+<div id="header">
+	<ul>
+		<li>
+			<%= link_to "প্রথম পাতা", root_path %>
+		</li>
+		<li>
+			<%= link_to "আজকের সব হিসাব", daily_accounts_path(uniq_date: Date.today, is_debit: "all") %>
+		</li>
+		<li>
+			<%= link_to "আজকের আয়", daily_accounts_path(uniq_date: Date.today, is_debit: false) %>
+		</li>
+		<li>
+			<%= link_to "আজকের ব্যয়", daily_accounts_path(uniq_date: Date.today, is_debit: true) %>
+		</li>
+		<li>
+			<%= link_to "কোম্পানি একাউন্ট", new_company_account_path %>
+		</li>
+		<li>
+			<%= link_to "স্টোরের মালের হিসাব", root_path %>
+		</li>
+		<li>
+			<%= link_to "দৈনিক বিক্রয় ", root_path %>
+		</li>
+		<li>
+			<%= link_to "দৈনিক ক্রয়", root_path %>
+		</li>
+	</ul>
+</div>

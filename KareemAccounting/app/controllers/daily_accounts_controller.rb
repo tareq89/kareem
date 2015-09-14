@@ -1,11 +1,21 @@
-class DailyAccountsController < ApplicationController
-
+class DailyAccountsController < ApplicationController	
 	def index
 
 		@can_add_new_entry = false
+		@daily_accounts = []
 		if params[:uniq_date] != nil
 			@date = Date.parse(params[:uniq_date]).strftime("%A  %d %B %Y")
-			@daily_accounts = DailyAccount.where(:date => params[:uniq_date])
+			@all_daily_accounts = DailyAccount.where(:date => params[:uniq_date])
+			@all_daily_accounts.each do |daily_account|
+				begin
+					is_debit = AccountType.find(daily_account.account_type_id).is_debit
+					if is_debit.to_s == params[:is_debit]
+						@daily_accounts << daily_account
+					end									
+				rescue Exception => e					
+				end
+			end
+
 			if Date.today.to_s==params[:uniq_date]
 				@can_add_new_entry = true				
 				@date = Date.today.strftime("%A  %d %B %Y")
@@ -17,11 +27,11 @@ class DailyAccountsController < ApplicationController
 		end
 
 		@new_daily_account = DailyAccount.new
-		@total_amount = DailyAccount.total_amount(@daily_accountsssss)
+		@total_amount = DailyAccount.total_amount(@daily_accounts)
 	end
 
 	def create
-		@daily_account = DailyAccount.new(daily_account_params)
+		@daily_account = DailyAccount.new(create_daily_account_param)
 		if @daily_account.save
 			redirect_to daily_accounts_path(:uniq_date => Date.today)
 		else
@@ -32,9 +42,8 @@ class DailyAccountsController < ApplicationController
 			print "This is error message : "
 			print @errors
 			print "\n"
-			redirect_to daily_accounts_path(:uniq_date => Date.today, :errors => @errors)
-		end
-		
+			redirect_to daily_accounts_path(:uniq_date => Date.today, :errors => @errors, :is_debit => params[:is_debit])
+		end	
 	end
 
 	def new
@@ -50,8 +59,8 @@ class DailyAccountsController < ApplicationController
 
 	def update
 		@daily_account = DailyAccount.find(params[:id])
-		if @daily_account.update_attributes(daily_account_params)
-			redirect_to daily_accounts_path(:uniq_date => Date.today)
+		if @daily_account.update_attributes(create_daily_account_param)
+			redirect_to daily_accounts_path(:uniq_date => Date.today, :is_debit => params[:is_debit])
 		else
 			render 'edit'			
 		end
@@ -63,9 +72,13 @@ class DailyAccountsController < ApplicationController
 	end
 	private
 		def daily_account_params
-			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :from_whom, :uniq_date, :account_type_id, :errors)
+			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :from_whom, :uniq_date, :account_type_id, :errors, :is_debit)
 			
 		end
+		def create_daily_account_param
+			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :from_whom, :uniq_date, :account_type_id)
+		end
+
 end
 
 

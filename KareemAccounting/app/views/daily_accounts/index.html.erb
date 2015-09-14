@@ -6,9 +6,10 @@
 <% end %>
 <div>
 	<form action="">
-		<% AccountType.account_type_options_select.each do |item| %>
+		<input type="radio" id="all" name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > সব একাউন্ট 		
+		<% account_type_options_select(params[:is_debit]).each do |item| %>
 			<input type="radio" id=<%= item[:value] %> name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:key] %> 		
-		<% end %>		
+		<% end %>
 	</form>
 </div>
 <%= render 'shared/error_message' %>
@@ -28,15 +29,15 @@
 	</thead>
 	<tbody>
 		<% @daily_accounts.each do |daily_account| %>
-			<tr class=<%= account_type_tr_class(daily_account.kind) %> >
+			<tr class=<%= account_type_tr_class(daily_account.account_type_id) %> >
 				<td><%= daily_account.category_spend %></td>
 				<td><%= daily_account.amount %></td>
 				<td><%= daily_account.to_whome %></td>
 				<td><%= daily_account.from_whom %></td>
-				<td><%= daily_account.kind %></td>
+				<td><%= AccountType.find(daily_account.account_type_id).key %></td>
 				<td><%= daily_account.note %></td>
 				<td><%= daily_account.created_at.strftime("%I:%M %p") %></td>
-				<td><%= link_to "edit", edit_daily_account_path(daily_account) %></td>
+				<td><%= link_to "edit", edit_daily_account_path(daily_account,is_debit: params[:is_debit]) %></td>
 				<td><%= link_to "delete", daily_account, method: :delete, data: { confirm: "You sure?" } %></td>
 			</tr>
 		<% end %>
@@ -59,7 +60,7 @@
 					<td> <%= f.text_field :amount, placeholder: "পরিমাণ ৳ "  %> </td>
 					<td> <%= f.text_field :to_whome, placeholder: "পরিশোধ করা হয়েছে যাকে "  %> </td>
 					<td> <%= f.text_field :from_whom, placeholder: "যে পরিশোধ করেছে "  %> </td>
-					<td> <%= f.select :account_type_id, AccountType.account_type_options , placeholder: "ধরন "  %> </td>
+					<td> <%= f.select :account_type_id, account_type_options(params[:is_debit])  %> </td>									 
 					<td> <%= f.text_field :note, placeholder: "নোট "  %> </td>
 					<td> <%= f.submit  %> </td>
 				<% end %>
@@ -69,42 +70,6 @@
 </table>
 <br><br><br>
 
-<div>
-	<% if @can_add_new_entry %>
-		<%= form_for(@new_daily_account) do |f| %>
-	        <ul>				
-				<li>
-					<%= f.label "খাত:" %> <br>
-					<%= f.text_field :category_spend, placeholder: "খাত"  %>
-				</li>
-				<li>
-					<%= f.label "পরিমাণ ৳ :" %> <br>
-					<%= f.text_field :amount, placeholder: "পরিমাণ ৳ "  %>
-				</li>
-				<li>
-					<%= f.label "পরিশোধ করা হয়েছে যাকে :" %> <br>
-					<%= f.text_field :to_whome, placeholder: "পরিশোধ করা হয়েছে যাকে "  %>
-				</li>
-				<li>
-					<%= f.label "যে পরিশোধ করেছে :" %> <br>
-					<%= f.text_field :from_whom, placeholder: "যে পরিশোধ করেছে "  %>
-				</li>
-				<li>
-					<%= f.label "ধরন :" %> <br>
-					<%= f.select :kind, AccountType.account_type_options , placeholder: "ধরন "  %>
-				</li>
-				<li>
-					<%= f.label "নোট :" %> <br>
-					<%= f.text_field :note, placeholder: "নোট "  %>
-				</li>
-				<li>
-					<%= f.label "এন্ট্রি দিন :" %> <br>
-					<%= f.submit  %>
-				</li>
-			</ul>				
-		<% end %>					
-	<% end %>					
-</div>
 						
 						
 						
