@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913094139) do
+ActiveRecord::Schema.define(version: 20150913164920) do
 
   create_table "account_types", force: :cascade do |t|
     t.string   "key"
     t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "company_accounts", force: :cascade do |t|
+    t.string   "name"
+    t.text     "address"
+    t.string   "phone"
+    t.boolean  "buyer"
+    t.boolean  "seller"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,6 +41,23 @@ ActiveRecord::Schema.define(version: 20150913094139) do
     t.string   "kind"
     t.integer  "account_type_id"
     t.string   "from_whom"
+    t.string   "receipt_no"
+  end
+
+  create_table "transaction_product_lists", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "total_unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transections", force: :cascade do |t|
+    t.string   "transaction_no"
+    t.integer  "company_account_id"
+    t.integer  "transaction_type_id"
+    t.integer  "transaction_product_list_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

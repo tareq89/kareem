@@ -1,0 +1,2 @@
+class CompanyAccountController < ApplicationController
+end

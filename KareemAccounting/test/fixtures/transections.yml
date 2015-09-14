@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transaction_no: MyString
+  company_account_id: 
+  transaction_type_id: 
+  transaction_product_list_id: 
+
+two:
+  transaction_no: MyString
+  company_account_id: 
+  transaction_type_id: 
+  transaction_product_list_id: 

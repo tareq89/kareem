@@ -3,7 +3,7 @@ class AccountType < ActiveRecord::Base
 	def AccountType.account_type_options
     	@account_types = []
     	AccountType.all.each do |account_type|
-    		acc_type_twice_array = [account_type.key, account_type.key]
+    		acc_type_twice_array = [account_type.key, account_type.id]
     		@account_types << acc_type_twice_array
     	end
     	return @account_types

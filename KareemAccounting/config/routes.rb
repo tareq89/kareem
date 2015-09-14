@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :daily_accounts
-
+  resources :company_account
 
   root 'welcome#index'
 

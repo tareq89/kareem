@@ -63,7 +63,7 @@ class DailyAccountsController < ApplicationController
 	end
 	private
 		def daily_account_params
-			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :from_whom, :uniq_date, :kind, :errors)
+			params.require(:daily_account).permit(:category_spend, :amount, :note, :to_whome, :from_whom, :uniq_date, :account_type_id, :errors)
 			
 		end
 end
