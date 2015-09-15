@@ -5,11 +5,15 @@
 	<% else %>
 	<h1>আপনি দেখছেন <%= @date  %> এর জমা খরচ: </h1>
 	<% end %>
-	<div>
+	<div class="well">
 		<form action="">
-			<input type="radio" id="all" name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > সব একাউন্ট 		
+			<label class="radio-inline">
+				<input type="radio" id="all" name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > সব একাউন্ট
+			</label>
 			<% account_type_options_select(params[:is_debit]).each do |item| %>
-				<input type="radio" id=<%= item[:css_class] %> name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:account_type] %> 		
+				<label class="radio-inline">
+					<input type="radio" id=<%= item[:css_class] %> name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:account_type] %> 	
+				</label>	
 			<% end %>
 		</form>
 	</div>
