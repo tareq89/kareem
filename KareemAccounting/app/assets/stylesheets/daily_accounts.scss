@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
 table {
    border: 1px solid black;
    td, th {
@@ -12,11 +14,32 @@ table {
    		border-bottom: 2px solid black;
    }
 }
-ul {
+#headerNav li {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+   display: inline;
+   padding-left: 30px;
 } 
-ul, li {
+
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
 }
 
+#account-table{
+   td{
+      padding: 10px;
+   }
+   th {
+      padding-left: 20px;
+      padding-right: 20px;
+   }
+}
+
+#account_submit{
+    margin-left: 700px;
+    margin-top: 50px;
+    margin-bottom: 200px;
+}

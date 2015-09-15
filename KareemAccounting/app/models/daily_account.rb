@@ -1,5 +1,4 @@
-class DailyAccount < ActiveRecord::Base
-	belongs_to :account_type
+class DailyAccount < ActiveRecord::Base	
 	validates :amount, :presence => true
 	before_save { self.date = Date.today }
 	def DailyAccount.total_amount(daily_accounts=nil)

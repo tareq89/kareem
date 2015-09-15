@@ -1,18 +1,22 @@
 class DailyAccountsController < ApplicationController	
 	def index
-
 		@can_add_new_entry = false
 		@daily_accounts = []
 		if params[:uniq_date] != nil
 			@date = Date.parse(params[:uniq_date]).strftime("%A  %d %B %Y")
 			@all_daily_accounts = DailyAccount.where(:date => params[:uniq_date])
+			print "total number of dailyAccount : #{@all_daily_accounts.count}"
 			@all_daily_accounts.each do |daily_account|
 				begin
-					is_debit = AccountType.find(daily_account.account_type_id).is_debit
+					is_debit = daily_account.is_debit
 					if is_debit.to_s == params[:is_debit]
+						@daily_accounts << daily_account
+					elsif params[:is_debit] == nil || params[:is_debit] == "all"
 						@daily_accounts << daily_account
 					end									
 				rescue Exception => e					
+					print "\nis_debit :  #{params[:is_debit]}\n"
+					print "\n#{e.message}"
 				end
 			end
 
@@ -31,12 +35,12 @@ class DailyAccountsController < ApplicationController
 	end
 
 	def create
-		@daily_account = DailyAccount.new(create_daily_account_param)
-		if @daily_account.save
+		@new_daily_account = DailyAccount.new(create_daily_account_param)
+		if @new_daily_account.save
 			redirect_to daily_accounts_path(:uniq_date => Date.today)
 		else
 			@errors = []
-			@daily_account.errors.full_messages.each do |msg| 
+			@new_daily_account.errors.full_messages.each do |msg| 
 				@errors << msg
 			end 
 			print "This is error message : "

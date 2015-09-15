@@ -1,30 +1,21 @@
 module DailyAccountsHelper
-    
+    def account_type_collection
+        [{account_type: "অন্যান্য", css_class: "other", is_debit: "all"},{account_type: "আয়", css_class: "income", is_debit: false},{account_type: "ব্যয়", css_class: "spent", is_debit: true},{account_type: "ধার নিয়েছে", css_class: "loan_given", is_debit: true},{account_type: "ধার পরিশোধ করেছে", css_class: "loan_paid", is_debit: false},{account_type: "ধার নিয়েছি", css_class: "loan_taken", is_debit: false},{account_type: "ধার পরিশোধ করেছি ", css_class: "loan_repaid", is_debit:   true}]
+    end
 
 
-    def account_type_tr_class(account_type_id)
-	    attr_class = "other"
-	    print "this is : " + account_type_id.to_s
-		AccountType.all.each do |item|    			
-		    begin
-		    	attr_class = AccountType.find(account_type_id).value
-		    rescue Exception => e	
-		    end		
-		end
-	    return attr_class
-	end
+   
 	
 
 
 	def account_type_options(is_debit)		
-    	account_types = []
-    	AccountType.all.each do |account_type|
-            if account_type[:is_debit].to_s == is_debit
-            	print "#{account_type[:is_debit].to_s}  :  #{is_debit} \n"
-        		acc_type_twice_array = [account_type.key, account_type.id]
+    	account_types = [["অন্যান্য", "other"]]
+    	account_type_collection.each do |account|
+            if account[:is_debit].to_s == is_debit
+        		acc_type_twice_array = [account[:account_type], account[:css_class]]
         		account_types << acc_type_twice_array                
             elsif is_debit=="all"                        	            
-	    		acc_type_twice_array = [account_type.key, account_type.id]
+	    		acc_type_twice_array = [account[:account_type], account[:css_class]]
 	    		account_types << acc_type_twice_array                            	
             end
 
@@ -37,13 +28,13 @@ module DailyAccountsHelper
 
 
     def account_type_options_select(is_debit)
-    	account_types_option_select = []
-    	AccountType.all.each do |account_type|
-            if account_type[:is_debit].to_s == is_debit
-        		acc_type_twice_array = {key: account_type.key,value: account_type.value}
+    	account_types_option_select = [{account_type: "অন্যান্য", css_class: "other"}]
+    	account_type_collection.each do |account|
+            if account[:is_debit].to_s == is_debit
+        		acc_type_twice_array = {account_type: account[:account_type],css_class: account[:css_class]}
         		account_types_option_select << acc_type_twice_array     
-    		elsif is_debit=="all"                        	            
-	    		acc_type_twice_array = {key: account_type.key,value: account_type.value}
+    		elsif is_debit=="all" || is_debit == nil                       	            
+	    		acc_type_twice_array = {account_type: account[:account_type],css_class: account[:css_class]}
         		account_types_option_select << acc_type_twice_array
             end
     	end

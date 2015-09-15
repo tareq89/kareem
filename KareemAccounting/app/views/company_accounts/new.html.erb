@@ -1,11 +1,30 @@
 <h1>Wanna create new company ???</h1>
 <ul>
 	<%= form_for @new_company do |f| %>
-	 <%= f.text_field :name %> 
-	 <%= f.text_field :address  %> 
-	 <%= f.text_field :phone  %> 
-	 <%= f.text_field :buyer  %> 
-	 <%= f.text_field :seller  %> 
-	 <%= f.submit  %> 
+		<li>
+			<%= f.label "কোম্পানি নাম" %>
+			<%= f.text_field :name, placeholder: "কোম্পানি নাম" %> 
+		</li>
+		<li>
+			<%= f.label "ঠিকানা" %>
+			<%= f.text_field :address , placeholder: "ঠিকানা" %> 
+		</li>
+		<li>
+			<%= f.label "ফোন" %>
+			<%= f.text_field :phone , placeholder: "ফোন" %> 
+		</li>
+		<li>
+			<%= f.label "ক্রেতা ?" %>
+			<%= f.text_field :buyer , placeholder: "ক্রেতা ?" %> 
+		</li>
+		<li>
+			<%= f.label "বিক্রেতা ?" %>
+			<%= f.text_field :seller , placeholder: "বিক্রেতা ?" %> 
+		</li>
+	<%= f.submit  %> 
 	<% end %>	
 </ul>
+
+
+
+

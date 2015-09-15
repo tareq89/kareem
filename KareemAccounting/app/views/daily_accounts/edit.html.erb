@@ -18,7 +18,7 @@
 			<td> <%= f.text_field :amount  %> </td>				
 			<td> <%= f.text_field :to_whome  %> </td>
 			<td> <%= f.text_field :from_whom  %> </td>
-			<td> <%= f.select :account_type_id, account_type_options("")   %> </td>
+			<td> <%= f.select :account_type, account_type_options("all")   %> </td>
 			<td> <%= f.text_field :note  %> </td>
 			<td> <%= f.submit  %> </td>
 		</tr>

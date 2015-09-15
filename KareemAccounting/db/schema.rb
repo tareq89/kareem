@@ -11,15 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914043258) do
-
-  create_table "account_types", force: :cascade do |t|
-    t.string   "key"
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "is_debit"
-  end
+ActiveRecord::Schema.define(version: 20150915043900) do
 
   create_table "company_accounts", force: :cascade do |t|
     t.string   "name"
@@ -36,13 +28,14 @@ ActiveRecord::Schema.define(version: 20150914043258) do
     t.integer  "amount"
     t.string   "note"
     t.string   "to_whome"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.date     "date"
-    t.string   "kind"
-    t.integer  "account_type_id"
+    t.string   "account_type"
+    t.string   "css_class"
     t.string   "from_whom"
     t.string   "receipt_no"
+    t.boolean  "is_debit"
   end
 
   create_table "transaction_product_lists", force: :cascade do |t|

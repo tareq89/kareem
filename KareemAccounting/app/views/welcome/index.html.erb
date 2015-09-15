@@ -1,5 +1,5 @@
 <h1>তারিখ অনুযায়ী জমা খরচ নির্বাচন করুনঃ </h1>
 <%= form_tag("/daily_accounts", method: "get") do %>
-	<td> <%= date_field(:name, :uniq_date) %> </td>
+	<td> <input type="date" name="uniq_date"> </td>
 	<td> <%= submit_tag("submit") %> </td>
 <% end %>
