@@ -11,9 +11,9 @@ class DailyAccountsController < ApplicationController
 			end
 
 			if params[:is_debit] != "all"
-				@daily_accounts = DailyAccount.where(:date => params[:uniq_date], :is_debit => param_is_debit)
-			else
 				@daily_accounts = DailyAccount.where(:date => params[:uniq_date])
+			else
+				@daily_accounts = DailyAccount.where(:date => params[:uniq_date], :is_debit => param_is_debit)
 			end			
 		else			
 			@daily_accounts = DailyAccount.all
@@ -91,7 +91,7 @@ class DailyAccountsController < ApplicationController
 
 		def param_is_debit
 			if params[:is_debit] == "true"
-					true
+				true
 			elsif params[:is_debit] == "false"
 				false
 			end	

@@ -35,14 +35,15 @@
 		</thead>
 		<tbody>
 			<% @daily_accounts.each do |daily_account| %>
-				<tr class=<%= daily_account.css_class %> >
+				<tr class="<%= daily_account.concat_css_class_and_is_debit %>" >
 					<td><%= daily_account.category_spend %></td>
 					<td><%= daily_account.amount %></td>
 					<td><%= daily_account.to_whome %></td>
 					<td><%= daily_account.from_whom %></td>
 					<td><%= daily_account.account_type %></td>
 					<td><%= daily_account.note %></td>
-					<td><%= daily_account.created_at.strftime("%I:%M %p") %></td>
+					<!-- <td><%= daily_account.created_at.strftime("%I:%M %p") %></td> -->
+					<td><%= daily_account.date %></td>
 					<td><%= daily_account.receipt_no %></td>
 					<td><%= link_to "edit", edit_daily_account_path(daily_account,is_debit: params[:is_debit]) %></td>
 					<td><%= link_to "delete", daily_account, method: :delete, data: { confirm: "You sure?" } %></td>
