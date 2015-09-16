@@ -10,7 +10,7 @@
 			<label class="radio-inline">
 				<input type="radio" id="all" name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > সব একাউন্ট
 			</label>
-			<% account_type_options_select(params[:is_debit]).each do |item| %>
+			<% account_type_options_radio(params[:is_debit]).each do |item| %>
 				<label class="radio-inline">
 					<input type="radio" id=<%= item[:css_class] %> name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:account_type] %> 	
 				</label>	
