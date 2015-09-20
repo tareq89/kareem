@@ -1,3 +1,28 @@
 <div id="content">
-	<%= @new_company %>
+	<h1>Company Accounts</h1>
+	<div id="company-account">
+		<table>
+			<thead>
+				<tr>
+					<th>name</th>
+					<th>address</th>
+					<th>phone</th>
+					<th>buyer</th>
+					<th>seller</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @company_accounts.each do |company_account| %>
+					<tr>
+						<td><%= company_account.name %></td>
+						<td><%= company_account.address %></td>
+						<td><%= company_account.phone %></td>
+						<td><%= company_account.buyer %></td>
+						<td><%= company_account.seller %></td>
+					</tr>
+				<% end %>
+			</tbody>
+			<tfoot></tfoot>
+		</table>
+	</div>
 </div>

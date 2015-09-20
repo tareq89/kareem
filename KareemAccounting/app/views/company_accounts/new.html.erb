@@ -7,7 +7,7 @@
 		</li>
 		<li>
 			<%= f.label "ঠিকানা" %>
-			<%= f.text_field :address , placeholder: "ঠিকানা" %> 
+			<%= f.text_area :address , placeholder: "ঠিকানা" %> 
 		</li>
 		<li>
 			<%= f.label "ফোন" %>
@@ -15,11 +15,11 @@
 		</li>
 		<li>
 			<%= f.label "ক্রেতা ?" %>
-			<%= f.text_field :buyer , placeholder: "ক্রেতা ?" %> 
+			<%= f.check_box :buyer %> 
 		</li>
 		<li>
 			<%= f.label "বিক্রেতা ?" %>
-			<%= f.text_field :seller , placeholder: "বিক্রেতা ?" %> 
+			<%= f.check_box :seller %> 
 		</li>
 	<%= f.submit  %> 
 	<% end %>	

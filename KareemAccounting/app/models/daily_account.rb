@@ -1,6 +1,11 @@
 class DailyAccount < ActiveRecord::Base	
+	validates :category_spend, :presence => true
 	validates :amount, :presence => true
-	before_save { self.date = Date.today }
+	validates :to_whome, :presence => true
+	validates :account_type, :presence => true
+	validates :from_whom, :presence => true
+
+	before_save :save_date
 	before_save :set_css_class_and_is_debit
 	before_update :set_css_class_and_is_debit
 	
@@ -16,7 +21,13 @@ class DailyAccount < ActiveRecord::Base
 
 
 	def DailyAccount.account_type_collection
-        [{account_type: "অন্যান্য", css_class: "other", is_debit: nil},{account_type: "আয়", css_class: "income", is_debit: false},{account_type: "ব্যয়", css_class: "spent", is_debit: true},{account_type: "ধার নিয়েছে", css_class: "loan_given", is_debit: true},{account_type: "ধার পরিশোধ করেছে", css_class: "loan_paid", is_debit: false},{account_type: "ধার নিয়েছি", css_class: "loan_taken", is_debit: false},{account_type: "ধার পরিশোধ করেছি ", css_class: "loan_repaid", is_debit:   true},{account_type: nil, css_class: nil, is_debit:   nil}]
+        [{account_type: "অন্যান্য", css_class: "other", is_debit: nil},
+        {account_type: "আয়", css_class: "income", is_debit: false},
+        {account_type: "ব্যয়", css_class: "spent", is_debit: true},
+        {account_type: "ধার নিয়েছে", css_class: "loan_given", is_debit: true},
+        {account_type: "ধার পরিশোধ করেছে", css_class: "loan_paid", is_debit: false},
+        {account_type: "ধার নিয়েছি", css_class: "loan_taken", is_debit: false},
+        {account_type: "ধার পরিশোধ করেছি ", css_class: "loan_repaid", is_debit: true}]
     end
 
     def set_css_class_and_is_debit
@@ -33,5 +44,13 @@ class DailyAccount < ActiveRecord::Base
     	css_class = "#{self.css_class} #{self.is_debit}"
     	print "this is ***************************************************** #{css_class} \n"
     	return css_class
+    end
+
+    def save_date
+    	if self.date == nil
+    		self.date = Date.today
+    		print "what the duck!!"
+    	end
+    	
     end
 end

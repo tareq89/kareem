@@ -10,8 +10,8 @@ class DailyAccountsController < ApplicationController
 				@date = Date.parse(params[:uniq_date]).strftime("%A  %d %B %Y")
 			end
 
-			if params[:is_debit] != "all"
-				@daily_accounts = DailyAccount.where(:date => params[:uniq_date])
+			if params[:is_debit] == "all" || params[:is_debit] == nil
+				@daily_accounts = DailyAccount.where(:date => params[:uniq_date])				
 			else
 				@daily_accounts = DailyAccount.where(:date => params[:uniq_date], :is_debit => param_is_debit)
 			end			
@@ -30,7 +30,7 @@ class DailyAccountsController < ApplicationController
 	def create
 		@new_daily_account = DailyAccount.new(create_daily_account_param)
 		if @new_daily_account.save
-			redirect_to daily_accounts_path(:uniq_date => Date.today)
+			redirect_to daily_accounts_path(:uniq_date => Date.today, :is_debit => "all")
 		else
 			@errors = []
 			@new_daily_account.errors.full_messages.each do |msg| 
@@ -73,7 +73,7 @@ class DailyAccountsController < ApplicationController
 	def update
 		@daily_account = DailyAccount.find(params[:id])
 		if @daily_account.update_attributes(create_daily_account_param)
-			redirect_to daily_accounts_path(:uniq_date => Date.today, :is_debit => params[:is_debit])
+			redirect_to daily_accounts_path(:uniq_date => @daily_account.date)
 		else
 			render 'edit'			
 		end

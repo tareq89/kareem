@@ -4,11 +4,15 @@ function makeTrHiddenOnRadioSelect (argument) {
 
 	$("tbody tr").each(function() {
 
-		console.log("this is className : "+this.className)
-		var account_type = this.className.split(" ")[0];
-		var is_debit = JSON.parse(this.className.split(" ")[1]);
-		console.log(account_type)
-		console.log(is_debit)
+		try{
+			var account_type = this.className.split(" ")[0];
+			var is_debit = JSON.parse(this.className.split(" ")[1]);
+			console.log("className 		: "+this.className)
+			console.log("account_type 	: "+account_type)
+			console.log("is_debit 		: "+is_debit)
+		} catch(err) {
+			console.log(err.message + "  " + this.className)
+		};
 
 
 		if (argument.id == "all") {
@@ -20,10 +24,10 @@ function makeTrHiddenOnRadioSelect (argument) {
 				total_amount += parseInt($(this).find(".amount").context.cells[1].innerHTML);
 			}	
 		}
-		else if (argument.id != this.className){
+		else if (argument.id != account_type){
 			$(this).css({'display':'none'});
 		};
-		if (argument.id == this.className) {
+		if (argument.id == account_type) {
 			// total_amount += parseInt($(this).find("#amount").context.cells[1].innerHTML);
 			if (is_debit) {
 				total_amount -= parseInt($(this).find(".amount").context.cells[1].innerHTML);
@@ -34,5 +38,6 @@ function makeTrHiddenOnRadioSelect (argument) {
 	});		
 
 	document.getElementById('total_amount').innerHTML = "	Total : "+total_amount+" ৳";
-	console.log(total_amount);
+	console.log("total_amount 		:" + total_amount);
+	console.log("\n\n\n")
 }

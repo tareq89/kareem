@@ -12,7 +12,7 @@
 			</label>
 			<% account_type_options_radio(params[:is_debit]).each do |item| %>
 				<label class="radio-inline">
-					<input type="radio" id=<%= item[:css_class] %> name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:account_type] %> 	
+					<input type="radio" id="<%= item[:css_class] %>" name="account_kind" onchange="makeTrHiddenOnRadioSelect(this)" > <%= item[:account_type] %> 	
 				</label>	
 			<% end %>
 		</form>
@@ -45,7 +45,7 @@
 					<!-- <td><%= daily_account.created_at.strftime("%I:%M %p") %></td> -->
 					<td><%= daily_account.date %></td>
 					<td><%= daily_account.receipt_no %></td>
-					<td><%= link_to "edit", edit_daily_account_path(daily_account,is_debit: params[:is_debit]) %></td>
+					<td><%= link_to "edit", edit_daily_account_path(daily_account,uniq_date: daily_account.date) %></td>
 					<td><%= link_to "delete", daily_account, method: :delete, data: { confirm: "You sure?" } %></td>
 				</tr>
 			<% end %>
